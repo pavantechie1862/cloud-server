@@ -1,6 +1,9 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const https = require("https");
+const fs = require("fs");
+
 const app = express();
 app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
@@ -15,14 +18,13 @@ app.use((req, res, next) => {
   );
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 });
 
 // app.use(cors());
 
 const employeeRoutes = require("./employee");
-// const roles = require("./roles");
 const customerRoutes = require("./customer");
 const groups = require("./materialGroups");
 const subgroup = require("./subGroup");
@@ -43,8 +45,31 @@ app.use("/auth", authRoute);
 app.use("/jobs", jobs);
 app.use("/role", role);
 app.use("/random", random);
-// app.use("/roles", roles);
 
-app.listen(port, () => {
-  console.log("changed to 8081");
+// Use HTTPS
+// const keyPath = path.join(__dirname, "public", "cloud-server.pem");
+// const certPath = path.join(__dirname, "public", "cloud-server.pem");
+// const caPath = path.join(__dirname, "public", "cloud-server.pem");
+
+// const options = {
+//   key: fs.readFileSync(keyPath, "utf8"),
+//   cert: fs.readFileSync(certPath, "utf8"),
+//   ca: fs.readFileSync(caPath, "utf8"),
+// };
+
+// const server = https.createServer(options, app);
+
+const options = {
+  key: fs.readFileSync(path.join(__dirname, "public", "cloud-server.pem")),
+  // cert: fs.readFileSync(path.join(__dirname, "public", "cloud-server.pem")),
+};
+
+const server = https.createServer(options, app);
+
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
+
+// server.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });

@@ -9,6 +9,7 @@ require("dotenv").config();
 const port = process.env.PORT;
 
 app.use((req, res, next) => {
+  console.log("request triggered");
   res.header(
     "Access-Control-Allow-Origin",
     "https://main.d2j3zrqyjtpuhw.amplifyapp.com/"

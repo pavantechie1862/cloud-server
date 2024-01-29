@@ -43,5 +43,5 @@ app.use("/random", random);
 // app.use("/roles", roles);
 
 app.listen(port, () => {
-  console.log("Server started on port 8081");
+  console.log("Latest");
 });

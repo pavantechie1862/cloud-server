@@ -45,5 +45,3 @@ app.use("/random", random);
 app.listen(port, () => {
   console.log("Server started on port 8081");
 });
-
-// ALTER USER 'your_username'@'your_host' IDENTIFIED WITH 'mysql_native_password' BY 'your_password';

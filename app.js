@@ -1,8 +1,6 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
-const https = require("https");
-const fs = require("fs");
 
 const app = express();
 app.use(express.json());
@@ -10,11 +8,12 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 require("dotenv").config();
 
 const port = process.env.PORT;
+app.use(cors());
 
 app.use((req, res, next) => {
   res.header(
     "Access-Control-Allow-Origin",
-    "https://main.d2j3zrqyjtpuhw.amplifyapp.com"
+    "https://main.d2j3zrqyjtpuhw.amplifyapp.com/"
   );
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -46,23 +45,6 @@ app.use("/jobs", jobs);
 app.use("/role", role);
 app.use("/random", random);
 
-// Use HTTPS
-// const keyPath = path.join(__dirname, "public", "cloud-server.pem");
-// const certPath = path.join(__dirname, "public", "cloud-server.pem");
-// const caPath = path.join(__dirname, "public", "cloud-server.pem");
-
-// const options = {
-//   key: fs.readFileSync(keyPath, "utf8"),
-//   cert: fs.readFileSync(certPath, "utf8"),
-//   ca: fs.readFileSync(caPath, "utf8"),
-// };
-
-// const server = https.createServer(options, app);
-
 app.listen(port, () => {
   console.log(" server is started at some port : " + port);
 });
-
-// server.listen(port, () => {
-//   console.log(`Server is running on port ${port}`);
-// });

@@ -10,16 +10,17 @@ require("dotenv").config();
 const port = process.env.PORT;
 app.use(cors());
 
-// app.use((req, res, next) => {
-//   console.log("hello world in cors");
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//   next();
-// });
-
-// app.use(cors());
+app.use((req, res, next) => {
+  console.log("hello world in cors");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://main.d2j3zrqyjtpuhw.amplifyapp.com"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 const employeeRoutes = require("./employee");
 const customerRoutes = require("./customer");

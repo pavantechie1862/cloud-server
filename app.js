@@ -11,6 +11,7 @@ const port = process.env.PORT;
 app.use(cors());
 
 app.use((req, res, next) => {
+  console.log("hello world in cors");
   res.header(
     "Access-Control-Allow-Origin",
     "https://main.d2j3zrqyjtpuhw.amplifyapp.com"

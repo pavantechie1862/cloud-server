@@ -59,15 +59,8 @@ app.use("/random", random);
 
 // const server = https.createServer(options, app);
 
-const options = {
-  key: fs.readFileSync(path.join(__dirname, "public", "cloud-server.pem")),
-  // cert: fs.readFileSync(path.join(__dirname, "public", "cloud-server.pem")),
-};
-
-const server = https.createServer(options, app);
-
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(port, () => {
+  console.log(" server is started at some port : " + port);
 });
 
 // server.listen(port, () => {

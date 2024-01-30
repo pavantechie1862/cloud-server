@@ -14,7 +14,7 @@ const upload = multer({ storage: storage });
 
 router.get("", async (req, res) => {
   console.log("random triggered");
-  res.status(200).send({ message: " hello world am pavan" });
+  res.status(200).send({ message: " hello world am pavan this is updated" });
 });
 
 module.exports = router;

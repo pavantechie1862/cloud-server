@@ -187,7 +187,7 @@ async function insertOrUpdateOrder(connection, orderData, file, id) {
         customer_id,
         PENDING_FOR_REVIEW,
         order_number,
-        parentRef
+        parentRef,
       ]
     : [
         order_id,
@@ -203,7 +203,7 @@ async function insertOrUpdateOrder(connection, orderData, file, id) {
         "PENDING_FOR_REVIEW",
 
         order_number,
-        parentRef
+        parentRef,
       ];
 
   return await util
@@ -215,7 +215,19 @@ async function insertOrUpdateMaterials(connection, orderData, orderId) {
   const materials = JSON.parse(orderData.testData);
   const materialResults = [];
   for (const material of materials) {
-    const { sampleId, subgroupId, materialSource, quantity, units, ref, brandName, refCode, sampleNum, siteName,weekNo } = material;
+    const {
+      sampleId,
+      subgroupId,
+      materialSource,
+      quantity,
+      units,
+      ref,
+      brandName,
+      refCode,
+      sampleNum,
+      siteName,
+      weekNo,
+    } = material;
     const sqlQuery =
       "INSERT INTO order_material (order_id, sample_id, subgroup,source,quantity,job_number,brand_name,ref_code,sample_number,site_name,week_number) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     const queryValues = [
@@ -225,11 +237,11 @@ async function insertOrUpdateMaterials(connection, orderData, orderId) {
       materialSource,
       quantity,
       ref,
-      brandName, 
-      refCode, 
+      brandName,
+      refCode,
       sampleNum,
       siteName,
-      weekNo
+      weekNo,
     ];
 
     const result = await util
@@ -359,7 +371,6 @@ router.get("/:orderId", async (req, res) => {
     //   WHERE om.order_id = ?`,
     //   [order.order_id]
     // );
-    
 
     const staffData = await query(
       `select CONCAT(emp.first_name, ' ', emp.last_name) AS name,emp.emp_id,dept.dept_id,profile_image as profile from department dept join employee emp on emp.department = dept.dept_id where dept_id in (?,?)`,

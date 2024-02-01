@@ -41,5 +41,5 @@ app.use("/role", role);
 app.use("/random", random);
 
 app.listen(port, () => {
-  console.log(" server is started at some port : " + port);
+  console.log("It's new route : " + port);
 });
